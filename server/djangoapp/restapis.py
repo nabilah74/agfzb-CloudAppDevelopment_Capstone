@@ -75,7 +75,7 @@ def get_dealers_from_cf(url, **kwargs):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
 def analyze_review_sentiments(review):
-    url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/8dcd5f6d-d581-41d6-ac49-ef77b857d58e"
+    url = "https://api.us-south.natugiral-language-understanding.watson.cloud.ibm.com/instances/8dcd5f6d-d581-41d6-ac49-ef77b857d58e"
     myapikey = "wbh-f2wwqdjhVp5zUfl0fFANEHyXtFAQr_GFvELov8Ul"
     authenticator = IAMAuthenticator(myapikey)
     NLU = NaturalLanguageUnderstandingV1(
@@ -85,11 +85,14 @@ def analyze_review_sentiments(review):
     response = NLU.analyze(text=review,features=Features(sentiment=SentimentOptions())).get_result()
     return response["sentiment"]
 
-def get_dealer_reviews_from_cf(url, dealerId):
+def get_dealer_reviews_from_cf(url, dealerID):
     results = []
     json_result = get_request(url)
+    print(json_result)
+    print(json_result)
+    print(json_result)
     if json_result:
-        dealers = json_result["result"]
+        dealers = json_result["docs"]
         # For each dealer object
         for dealer in dealers["docs"]:
             sentiment = analyze_review_sentiments(dealer["review"])
